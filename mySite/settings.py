@@ -81,6 +81,17 @@ DATABASES = {
     }
 }
 
+#DATABASES = {
+#    'default': {
+#        'ENGINE': 'django.db.backends.mysql',
+#        'NAME': 'Youhei726$dengon', #　作成したデータベース名
+#        'USER': 'Youhei726', # ログインユーザー名
+#				'PASSWORD': 'qcammp001',
+#        'HOST': 'Youhei726.mysql.pythonanywhere-services.com',
+#        'PORT': '',
+#    }
+#}
+
 
 # Password validation
 # https://docs.djangoproject.com/en/2.0/ref/settings/#auth-password-validators
