@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title></title>
     </head>     
     <body>
@@ -10,8 +11,9 @@
                 <td>To</td>
                 <td>From</td>
             </tr>     
-            {% for entity in entities %}     
-                <form action="update_task" method="GET">
+            {% for entity in entities %}
+                <form action="update_task" method="POST">
+{% csrf_token %}
                     <tr>
                         <td>{{entity.nameTo}} <input type="hidden" name='nameTo' value="{{entity.nameTo}}"></td>
                         <td>{{entity.nameFrom}} <input type="hidden" name='nameFrom' value="{{entity.nameFrom}}"></td>     
