@@ -13,9 +13,9 @@ def input(request):
 
 
 def list(request):     
-    name = request.GET['name']     
-    category = request.GET['category']
-    dengon.objects.update_or_create(name=name,category=category)
+    nameTo = request.GET['nameTo']
+    nameFrom = request.GET['nameFrom']
+    dengon.objects.update_or_create(nameTo=nameTo,nameFrom=nameFrom)
     entities = dengon.objects.all()   
     html = render_to_string('list.html', {'entities':entities})     
     return HttpResponse(html)

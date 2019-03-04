@@ -4,6 +4,20 @@
         <title></title>
     </head>     
     <body>
-aaaa
+        <h2>den-gon</h2> <br>     
+        <table border="1">
+            <tr>
+                <td>To</td>
+                <td>From</td>
+            </tr>     
+            {% for entity in entities %}     
+                <form action="update_task" method="GET">
+                    <tr>
+                        <td>{{entity.nameTo}} <input type="hidden" name='nameTo' value="{{entity.nameTo}}"></td>
+                        <td>{{entity.nameFrom}} <input type="hidden" name='nameFrom' value="{{entity.nameFrom}}"></td>     
+                    </tr>     
+                </form>     
+            {% endfor %}     
+        </table>     
     </body>     
 </html>
