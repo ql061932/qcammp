@@ -11,9 +11,8 @@
 	<script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
 </head>
 <body>
-	<div class="container-fluid">
 		<!-- navigation -->
-    <nav class="navbar navbar-expand-sm navbar-dark bg-info mt-3 mb-3">
+    <nav class="navbar navbar-expand-sm navbar-dark bg-info mb-3">
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav4" aria-controls="navbarNav4" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -24,50 +23,51 @@
                     <a class="nav-link" href="#">伝言受付</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">伝言一覧</a>
+                    <a class="nav-link" href="./list">伝言一覧</a>
                 </li>
             </ul>
         </div>
     </nav>  
-
+	<div class="container">
 		<!-- form -->
 		<div class="row">
-			<div class="col-sm-6 offset-sm-3 text-center"><h4><u>伝言受付</u></h4></div>
+			<div class="col-sm-6 mx-auto text-center"><h4><u>伝言受付</u></h4></div>
 		</div>
 	  <form action="list" method="POST">{% csrf_token %}
 			<div class="row">
-				<div class="col-sm-6 offset-sm-3"><label>To</label></div>
+				<div class="col-sm-6 mx-auto"><span class="label label-default">To</span></div>
 			</div>
 			<div class="row">
-				<div class="col-sm-6 offset-sm-3"><input type="text" class="form-control" name="nameTo" placeholder="To名前"></div>
+				<div class="col-sm-6 mx-auto"><input type="text" class="form-control" name="nameTo" placeholder="To名前"></div>
 			</div>
 			<div class="row">
-				<div class="col-sm-6 offset-sm-3"><label>From</label></div>
+				<div class="col-sm-6 mx-auto"><span class="label label-default">From</span></div>
 			</div>
 			<div class="row">
-				<div class="col-sm-6 offset-sm-3"><input type="text" class="form-control" name="nameFrom" placeholder="From名前"></div>
+				<div class="col-sm-6 mx-auto"><input type="text" class="form-control" name="nameFrom" placeholder="From名前"></div>
 			</div>
 			<div class="row">
-				<div class="col-sm-6 offset-sm-3"><label>受付</label></div>
+				<div class="col-sm-6 mx-auto"><span class="label label-default">受付</span></div>
 			</div>
 			<div class="row">
-				<div class="col-sm-6 offset-sm-3"><input type="text" class="form-control" name="nameTakenBy" placeholder="受付名前"></div>
+				<div class="col-sm-6 mx-auto"><input type="text" class="form-control" name="nameTakenBy" placeholder="受付名前"></div>
 			</div>
 			<div class="row">
-				<div class="col-sm-6 offset-sm-3"><label>日付</label></div>
+				<div class="col-sm-6 mx-auto"><span class="label label-default">日付</span></div>
 			</div>
 			<div class="row">
-				<div class="col-sm-6 offset-sm-3"><input type="text" class="form-control" name="dateTime" placeholder="日付"></input></div>
+				<div class="col-sm-6 mx-auto"><input type="text" class="form-control" name="dateTime" placeholder="日付"></input></div>
 			</div>
 			<div class="row">
-				<div class="col-sm-6 offset-sm-3"><label>時間</label></div>
+				<div class="col-sm-6 mx-auto"><span class="label label-default">時間</span></div>
 			</div>
 			<div class="row">
-				<div class="col-sm-3 offset-sm-3"><input type="text" class="form-control" name="date" placeholder="日付"></input></div>
+				<div class="col-sm-3 offset-sm-3"><input type="text" class="form-control" name="date" placeholder="時間"></input></div>
 				<div class="col-sm-3"><input type="text" class="form-control" name="time" placeholder="時間"></input></div>
 			</div>
+			<div class="row">&nbsp;</div>
 			<div class="row">
-				<div class="col-sm-6 offset-sm-3 text-center"><input type="submit" class="btn btn-md btn-primary" value="register"></input></div>
+				<div class="col-sm-6 mx-auto text-center"><input type="submit" class="btn btn-primary btn-md" value="register"></input></div>
 			</div>
 		</form>
 	</div>

@@ -8,17 +8,14 @@ from django.template import RequestContext
 from dengon.models import dengon
 
 def input(request):
-    entities = dengon.objects.all()
-    return render(request, 'input.html', {'entities':entities});
+	entities = dengon.objects.all()
+	return render(request, 'input.html', {'entities':entities});
 
 def list(request):
-    #データ登録
-    nameTo = request.POST['nameTo']
-    nameFrom = request.POST['nameFrom']
-    dengon.objects.update_or_create(nameTo=nameTo,nameFrom=nameFrom)
-
-    #検索
-
-    #データ取得
-    entities = dengon.objects.all()
-    return render(request, 'list.html', {'entities':entities});
+	if not len(request.POST['nameTo']) == 0:
+		#データ登録
+		nameTo = request.POST['nameTo']
+		nameFrom = request.POST['nameFrom']
+		dengon.objects.update_or_create(nameTo=nameTo,nameFrom=nameFrom)
+	entities = dengon.objects.all()
+	return render(request, 'list.html', {'entities':entities});
