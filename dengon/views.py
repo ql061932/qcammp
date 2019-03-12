@@ -13,7 +13,7 @@ def input(request):
 
 def list(request):
 	if not len(request.POST['nameTo']) == 0:
-		#ƒf[ƒ^“o˜^
+		#ãƒ‡ãƒ¼ã‚¿ç™»éŒ²
 		nameTo = request.POST['nameTo']
 		nameFrom = request.POST['nameFrom']
 		dengon.objects.update_or_create(nameTo=nameTo,nameFrom=nameFrom)
