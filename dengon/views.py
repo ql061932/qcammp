@@ -12,10 +12,13 @@ def input(request):
 	return render(request, 'input.html', {'entities':entities});
 
 def list(request):
-	if not len(request.POST['nameTo']) == 0:
-		#データ登録
+	#create
+	if 'nameTo' in request.POST:
 		nameTo = request.POST['nameTo']
 		nameFrom = request.POST['nameFrom']
 		dengon.objects.update_or_create(nameTo=nameTo,nameFrom=nameFrom)
+	#search
+	if 'wk.dateTime' in request.POST:
+		wkdateTime = request.POST['wk.dateTime']
 	entities = dengon.objects.all()
 	return render(request, 'list.html', {'entities':entities});
