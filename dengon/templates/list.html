@@ -1,25 +1,109 @@
+{% load static %}
 <!DOCTYPE html>
 <html>
     <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title></title>
-    </head>     
+        <title>DEN-GON</title>
+	<!-- BootstrapのCSS読み込み -->
+	<link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.min.css' %}">
+	<script src="{% static 'js/jquery-3.3.1.min.js' %}"></script>
+	<script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
+</head>
     <body>
-        <h2>den-gon</h2> <br>     
-        <table border="1">
+	<!-- navigation -->
+    <nav class="navbar navbar-expand-sm navbar-dark bg-info mb-3">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav4" aria-controls="navbarNav4" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <a class="navbar-brand" href="#">DEN-GON</a>
+        <div class="collapse navbar-collapse">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" href="./">伝言受付</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" href="./list">伝言一覧</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+<div class="container">
+        <div class="row">
+		<div class="col-sm-6 mx-auto"><h2>伝言一覧</h2></div>
+	</div>
+<form action="list" method="POST">
+        <table>
             <tr>
-                <td>To</td>
-                <td>From</td>
-            </tr>     
-            {% for entity in entities %}
-                <form action="update_task" method="POST">
-{% csrf_token %}
+            <td>To</td>
+            </tr> 
+            <tr>
+            <td><input type="text" name="wk.nameTo"></input></td>
+            </tr>
+
+            <tr>
+            <td>受付</td>
+            </tr> 
+            <tr>
+            <td><input type="text" name="wk.nameTakenBy"></input></td>
+            </tr>
+
+            <tr>
+            <td>日付</td>
+            </tr> 
+            <tr>
+            <td><input type="date" name="wk.dateTime"></input></td>
+            </tr>
+
+            <tr>
+            <td>伝言確認</td>
+            </tr>
+            <tr>
+            <td>
+            <select name="wk.confirm.mess">
+            <option value="yes">Yes</option>
+            <option value="no">No</option>
+            </select>
+            </td>
+            <tr>
+        </table>
+	<div class="row">
+		<div class="col-sm-6 mx-auto text-center"><input type="submit" class="btn btn-primary btn-md" value="検索"></input></div>
+	</div>
+</form>
+            <table width="75%">
+                <thead>
+                <tr>
+                    <th align=center >時間</th>
+                    <th align=center>To</th>
+                    <th align=center>From</th>
+                    <th align=center>受付</th>
+                    <th align=center>要件</th>
+                    <th align=center>伝言確認</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for entity in entities %}
+                {% {entity.requirement} %}
+                <form action="update_task" method="POST">{% csrf_token %}
                     <tr>
-                        <td>{{entity.nameTo}} <input type="hidden" name='nameTo' value="{{entity.nameTo}}"></td>
-                        <td>{{entity.nameFrom}} <input type="hidden" name='nameFrom' value="{{entity.nameFrom}}"></td>     
-                    </tr>     
+                        <!-- 時間 -->
+                        <td width="20%" align=center>{{entity.dateTime}} <input type="hidden" name='dateTime' value="{{entity.dateTime}}"></td>
+                        <!-- To -->
+                        <td width="10%" align=center>{{entity.nameTo}} <input type="hidden" name='nameTo' value="{{entity.nameTo}}"></td>
+                        <!-- From -->
+                        <td width="10%" align=center>{{entity.nameFrom}} <input type="hidden" name='nameFrom' value="{{entity.nameFrom}}"></td>
+                        <!-- 受付 -->
+                        <td width="10%" align=center>{{entity.nameTakenBy}} <input type="hidden" name='nameTakenBy' value="{{entity.nameTakenBy}}"></td>
+                        <!-- 要件 -->
+                        <td width="30%" align=center>{{entity.requirement}} <input type="hidden" name='requirement' value="{{entity.requirement}}"></td>
+                        <!-- 伝言確認 -->
+                        <td width="10%" align=center></td>
+                    </tr>
                 </form>     
-            {% endfor %}     
-        </table>     
+                {% endfor %}
+                </tbody>
+            </table>
+         </div> 
+	</div>    
     </body>     
 </html>
