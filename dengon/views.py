@@ -12,17 +12,25 @@ def input(request):
 	return render(request, 'input.html', {'entities':entities})
 
 def list(request):
-	#check
-	form = dengonForm(request.POST)
-	if not form.is_valid():
-	    return render(request, 'input.html', {'error':1})
-	#create
-	if 'nameTo' in request.POST:
-		nameTo = request.POST['nameTo']
-		nameFrom = request.POST['nameFrom']
-		dengon.objects.update_or_create(nameTo=nameTo,nameFrom=nameFrom)
+
+	#伝言登録から遷移
+	if 'input' in request.POST:
+		#check
+		form = dengonForm(request.POST)
+		if not form.is_valid():
+			return render(request, 'input.html', {'error':1})
+		#create
+		if 'nameTo' in request.POST:
+			nameTo = request.POST['nameTo']
+			nameFrom = request.POST['nameFrom']
+			dengon.objects.update_or_create(nameTo=nameTo,nameFrom=nameFrom)
+
+	#伝言一覧から遷移
 	#search
-	if 'wk.dateTime' in request.POST:
+	if 'search' in request.POST:
 		wkdateTime = request.POST['wk.dateTime']
-	entities = dengon.objects.all()
+		entities = dengon.objects.all()
+	else:
+		entities = dengon.objects.all()
+
 	return render(request, 'list.html', {'entities':entities})
