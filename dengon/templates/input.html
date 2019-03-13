@@ -28,10 +28,18 @@
             </ul>
         </div>
     </nav>  
+	{% if error == 1 %}
+		<div class="alert alert-danger alert-dismissible fade show" role="alert">
+			Toを入力してください
+			<button type="button" class="close" data-dismiss="alert">
+				<span aria-hidden="true">&times;</span>
+			</button>
+		</div>
+	{% endif %}
 	<div class="container">
 		<!-- form -->
 		<div class="row">
-			<div class="col-sm-6 mx-auto text-center"><h4><u>伝言受付</u></h4></div>
+			<div class="col-sm-6 mx-auto text-center"><h4>伝言受付</h4></div>
 		</div>
 	  <form action="list" method="POST">{% csrf_token %}
 			<div class="row">
