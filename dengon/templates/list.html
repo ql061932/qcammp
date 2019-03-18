@@ -1,109 +1,145 @@
 {% load static %}
 <!DOCTYPE html>
 <html>
-    <head>
+<head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>DEN-GON</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>DEN-GON</title>
 	<!-- BootstrapのCSS読み込み -->
 	<link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.min.css' %}">
 	<script src="{% static 'js/jquery-3.3.1.min.js' %}"></script>
 	<script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
 </head>
-    <body>
+<body>
 	<!-- navigation -->
-    <nav class="navbar navbar-expand-sm navbar-dark bg-info mb-3">
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav4" aria-controls="navbarNav4" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <a class="navbar-brand" href="#">DEN-GON</a>
-        <div class="collapse navbar-collapse">
-            <ul class="navbar-nav">
-                <li class="nav-item">
-                    <a class="nav-link" href="./">伝言受付</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link active" href="./list">伝言一覧</a>
-                </li>
-            </ul>
-        </div>
+	<nav class="navbar navbar-expand-sm navbar-dark bg-info mb-3">
+		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav4" aria-controls="navbarNav4" aria-expanded="false" aria-label="Toggle navigation">
+		<span class="navbar-toggler-icon"></span>
+		</button>
+		<a class="navbar-brand" href="#">DEN-GON</a>
+		<div class="collapse navbar-collapse">
+			<ul class="navbar-nav">
+				<li class="nav-item">
+				<a class="nav-link" href="./">伝言受付</a>
+				</li>
+				<li class="nav-item">
+				<a class="nav-link active" href="./list">伝言一覧</a>
+				</li>
+	    	</ul>
+		</div>
     </nav>
-<div class="container">
-        <div class="row">
-		<div class="col-sm-6 mx-auto"><h2>伝言一覧</h2></div>
+
+	<div class="containert">
+		<div class="row">
+		<div class="col-sm-6 mx-auto text-center"><h4>伝言一覧</h4></div>
+		</div>
 	</div>
-<form action="list" method="POST">
-        <table>
-            <tr>
-            <td>To</td>
-            </tr> 
-            <tr>
-            <td><input type="text" name="wk.nameTo"></input></td>
-            </tr>
+	
+	<div class="container bg-light mb-3">
 
-            <tr>
-            <td>受付</td>
-            </tr> 
-            <tr>
-            <td><input type="text" name="wk.nameTakenBy"></input></td>
-            </tr>
+		<div class="row">
+			<div class="col-sm-6 mx-auto"><span class="label label-default">To</span></div>
+		</div>
+		<div class="row">
+			<div class="col-sm-6 mx-auto"><input type="text" class="form-control" name="wk.nameTo" placeholder="To名前"></div>
+		</div>
+		<div class="row">
+			<div class="col-sm-6 mx-auto"><span class="label label-default">受付</span></div>
+		</div>
+		<div class="row">
+			<div class="col-sm-6 mx-auto"><input type="text" class="form-control" name="wk.nameTo" wk.nameTakenBy="受付名前"></div>
+		</div>
+		<div class="row">
+			<div class="col-sm-6 mx-auto"><span class="label label-default">日付</span></div>
+		</div>
+		<div class="row">
+			<div class="col-sm-6 mx-auto"><input type="date" class="form-control" name="wk.dateTime" wk.nameTakenBy="日付"></div>
+		</div>
+		<div class="row">
+			<div class="col-sm-6 mx-auto"><span class="label label-default">伝言確認</span></div>
+		</div>
 
-            <tr>
-            <td>日付</td>
-            </tr> 
-            <tr>
-            <td><input type="date" name="wk.dateTime"></input></td>
-            </tr>
+		<!-- プルダウン作成途中 -->
+		<div class="dropdown">
+			<button type="button" class="btn btn-primary dropdown-toggle col-sm-6" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
+			<ul class="dropdown-menu">
+				<li><button class="dropdown-item" value="項目1">未</button></li>
+				<li><button class="dropdown-item" value="項目2">済</button></li>
+			</ul>
+		</div>
 
-            <tr>
-            <td>伝言確認</td>
-            </tr>
-            <tr>
-            <td>
-            <select name="wk.confirm.mess">
-            <option value="yes">Yes</option>
-            <option value="no">No</option>
-            </select>
-            </td>
-            <tr>
-        </table>
-	<div class="row">
-		<div class="col-sm-6 mx-auto text-center"><input type="submit" class="btn btn-primary btn-md" value="検索"></input></div>
+		</div>
+			<div class="row"> 
+			<div class="col-sm-6 mx-auto text-center mb-3"><input type="submit" class="btn btn-primary btn-md" value="検索"></input></div>
+		</div>
 	</div>
-</form>
-            <table width="75%">
-                <thead>
-                <tr>
-                    <th align=center >時間</th>
-                    <th align=center>To</th>
-                    <th align=center>From</th>
-                    <th align=center>受付</th>
-                    <th align=center>要件</th>
-                    <th align=center>伝言確認</th>
-                </tr>
-                </thead>
-                <tbody>
-                {% for entity in entities %}
-                {% {entity.requirement} %}
-                <form action="update_task" method="POST">{% csrf_token %}
-                    <tr>
-                        <!-- 時間 -->
-                        <td width="20%" align=center>{{entity.dateTime}} <input type="hidden" name='dateTime' value="{{entity.dateTime}}"></td>
-                        <!-- To -->
-                        <td width="10%" align=center>{{entity.nameTo}} <input type="hidden" name='nameTo' value="{{entity.nameTo}}"></td>
-                        <!-- From -->
-                        <td width="10%" align=center>{{entity.nameFrom}} <input type="hidden" name='nameFrom' value="{{entity.nameFrom}}"></td>
-                        <!-- 受付 -->
-                        <td width="10%" align=center>{{entity.nameTakenBy}} <input type="hidden" name='nameTakenBy' value="{{entity.nameTakenBy}}"></td>
-                        <!-- 要件 -->
-                        <td width="30%" align=center>{{entity.requirement}} <input type="hidden" name='requirement' value="{{entity.requirement}}"></td>
-                        <!-- 伝言確認 -->
-                        <td width="10%" align=center></td>
-                    </tr>
-                </form>     
-                {% endfor %}
-                </tbody>
-            </table>
-         </div> 
-	</div>    
-    </body>     
+
+
+
+
+	<div class="container">
+		<table class="col-sm-12 mx-auto table ">
+	                <thead>
+	                <tr class="bg-info">
+	                    <td >時間</td>
+	                    <td>To</td>
+	                    <td>From</td>
+	                    <td>受付</td>
+	                    <td>要件</td>
+	                    <td>伝言確認</td>
+	                </tr>
+	                </thead>
+
+	                <tbody>
+	                <script type="text/javascript">
+				    $(function () {
+				      $('[data-toggle="tooltip"]').tooltip();
+				    })
+				</script>
+	                {% for entity in entities %}
+	                <form action="update_task" method="POST">{% csrf_token %}
+	                    <tr>
+	                        <!-- 時間 -->
+	                        <td>{{entity.dateTime}} <input type="hidden" name='dateTime' value="{{entity.dateTime}}"></td>
+	                        <!-- To -->
+	                        <td>{{entity.nameTo}} <input type="hidden" name='nameTo' value="{{entity.nameTo}}"></td>
+	                        <!-- From -->
+	                        <td>{{entity.nameFrom}} <input type="hidden" name='nameFrom' value="{{entity.nameFrom}}"></td>
+	                        <!-- 受付 -->
+	                        <td>{{entity.nameTakenBy}} <input type="hidden" name='nameTakenBy' value="{{entity.nameTakenBy}}"></td>
+	                        <!-- 要件 -->
+	                                                {% if entity.requirement == '0' %}
+                        	<td width="30%" align=center>
+                        		{% if entity.message == '' %}
+	                        	電話がありました
+	                        	{% else %}
+	                        	<span class="text-primary"  data-original-title="{{entity.message}}" data-toggle="tooltip">電話がありました</span>
+	                        	{% endif %}
+	                        </td>
+                        {% elif entity.requirement == '1' %}
+                        	<td width="30%" align=center>
+                        		{% if entity.message == '' %}
+                        		また電話します
+                        		{% else %}
+                        		<span class="text-primary"  data-original-title="{{entity.message}}" data-toggle="tooltip">また電話します</span>
+                        		{% endif %}
+                        	</td>
+                        {% else %}
+                        	<td width="30%" align=center>
+                        		{% if entity.message == '' %}
+                        		先方へ電話してください
+                        		{% else %}
+                        		<span class="text-primary"  data-original-title="{{entity.message}}" data-toggle="tooltip">先方へ電話してください</span>
+                        		{% endif %}
+                        	</td>
+                        {% endif %}
+	                        <!-- 伝言確認 -->
+	                        <td>伝言確認テスト</td>
+	                    </tr>
+	                </form>     
+	                {% endfor %}
+	                </tbody>
+		</table>
+	</div>
+</body>
 </html>
