@@ -36,47 +36,76 @@
 			</button>
 		</div>
 	{% endif %}
-	<div class="container">
-		<!-- form -->
-		<div class="row">
-			<div class="col-sm-6 mx-auto text-center"><h4>伝言受付</h4></div>
-		</div>
-	  <form action="list" method="POST">{% csrf_token %}
-			<div class="row">
-				<div class="col-sm-6 mx-auto"><span class="label label-default">To</span></div>
+	<div class="row">
+		<div class="col-sm-6 mx-auto text-center"><h4>伝言受付</h4></div>
+	</div>
+	<!-- form -->
+	<div class="container bg-light">
+		<form action="list" method="POST">{% csrf_token %}
+			<div class="form-group">
+				<div class="row">
+					<div class="col-sm-6 mx-auto mt-2"><label>To</label></div>
+				</div>
+				<div class="row">
+					<div class="col-sm-6 mx-auto"><input type="text" class="form-control" name="nameTo" placeholder="To名前"></div>
+				</div>
 			</div>
-			<div class="row">
-				<div class="col-sm-6 mx-auto"><input type="text" class="form-control" name="nameTo" placeholder="To名前"></div>
+			<div class="form-group">
+				<div class="row">
+					<div class="col-sm-6 mx-auto"><label>From</label></div>
+				</div>
+				<div class="row">
+					<div class="col-sm-6 mx-auto"><input type="text" class="form-control" name="nameFrom" placeholder="From名前"></div>
+				</div>
 			</div>
-			<div class="row">
-				<div class="col-sm-6 mx-auto"><span class="label label-default">From</span></div>
+			<div class="form-group">
+				<div class="row">
+					<div class="col-sm-6 mx-auto"><label>受付</label></div>
+				</div>
+				<div class="row">
+					<div class="col-sm-6 mx-auto"><input type="text" class="form-control" name="nameTakenBy" placeholder="受付"></div>
+				</div>
 			</div>
-			<div class="row">
-				<div class="col-sm-6 mx-auto"><input type="text" class="form-control" name="nameFrom" placeholder="From名前"></div>
+			<div class="form-group">
+				<div class="row">
+					<div class="col-sm-6 mx-auto"><label>日付</label></div>
+				</div>
+				<div class="row">
+					<div class="col-sm-6 mx-auto"><input type="text" class="form-control" name="date" placeholder="日付"></div>
+				</div>
 			</div>
-			<div class="row">
-				<div class="col-sm-6 mx-auto"><span class="label label-default">受付</span></div>
+			<div class="form-group">
+				<div class="row">
+					<div class="col-sm-6 mx-auto"><label>時間</label></div>
+				</div>
+				<div class="row">
+					<div class="col-sm-3 offset-sm-3"><input type="text" class="form-control" name="time" placeholder="時"></div>
+					<div class="col-sm-3"><input type="text" class="form-control" name="minutes" placeholder="分"></div>
+				</div>
 			</div>
-			<div class="row">
-				<div class="col-sm-6 mx-auto"><input type="text" class="form-control" name="nameTakenBy" placeholder="受付名前"></div>
+			<div class="form-group">
+				<div class="row">
+					<div class="col-sm-3 offset-sm-3"><label><input type="radio" name="requirement" value="0" checked>電話がありました</label></div>
+				</div>
+				<div class="row">
+					<div class="col-sm-3 offset-sm-3"><label><input type="radio" name="requirement" value="1">また電話します</label></div>
+				</div>
+				<div class="row">
+					<div class="col-sm-3 offset-sm-3"><label><input type="radio" name="requirement" value="2">先方へ電話してください</label></div>
+					<div class="col-sm-3"><input type="text" class="form-control" name="phoneNumber" placeholder="TEL"></div>
+				</div>
 			</div>
-			<div class="row">
-				<div class="col-sm-6 mx-auto"><span class="label label-default">日付</span></div>
+			<div class="form-group">
+				<div class="row">
+					<div class="col-sm-6 mx-auto"><label for="message">メッセージ</label></div>
+				</div>
+				<div class="row">
+					<div class="col-sm-6 mx-auto"><textarea class="form-control" name="message" rows="3" placeholder="メッセージ"></textarea></div>
+				</div>
 			</div>
-			<div class="row">
-				<div class="col-sm-6 mx-auto"><input type="text" class="form-control" name="dateTime" placeholder="日付"></input></div>
-			</div>
-			<div class="row">
-				<div class="col-sm-6 mx-auto"><span class="label label-default">時間</span></div>
-			</div>
-			<div class="row">
-				<div class="col-sm-3 offset-sm-3"><input type="text" class="form-control" name="date" placeholder="時間"></input></div>
-				<div class="col-sm-3"><input type="text" class="form-control" name="time" placeholder="時間"></input></div>
-			</div>
-			<div class="row">&nbsp;</div>
 			<div class="row">
 				<input type="hidden" name="input" value="input">
-				<div class="col-sm-6 mx-auto text-center"><input type="submit" class="btn btn-primary btn-md" value="register"></input></div>
+				<div class="col-sm-6 mx-auto text-center mb-4"><input type="submit" class="btn btn-primary btn-md" value="登録"></div>
 			</div>
 		</form>
 	</div>

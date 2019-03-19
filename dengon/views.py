@@ -23,7 +23,16 @@ def list(request):
 		if 'nameTo' in request.POST:
 			nameTo = request.POST['nameTo']
 			nameFrom = request.POST['nameFrom']
-			dengon.objects.update_or_create(nameTo=nameTo,nameFrom=nameFrom)
+			nameTakenBy = request.POST['nameTakenBy']
+			requirement = request.POST['requirement']
+			phoneNumber = request.POST['phoneNumber']
+			message = request.POST['message']
+			dengon.objects.update_or_create(nameTo=nameTo,
+											nameFrom=nameFrom,
+											nameTakenBy=nameTakenBy,
+											requirement=requirement,
+											phoneNumber=phoneNumber,
+											message=message)
 
 	#伝言一覧から遷移
 	#search
