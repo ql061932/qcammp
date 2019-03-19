@@ -41,51 +41,47 @@
 			<div class="col-sm-6 mx-auto"><span class="label label-default">To</span></div>
 		</div>
 		<div class="row">
-			<div class="col-sm-6 mx-auto"><input type="text" class="form-control" name="wk.nameTo" placeholder="To名前"></div>
+			<div class="col-sm-6 mx-auto mb-4"><input type="text" class="form-control" name="wk.nameTo" placeholder="To名前"></div>
 		</div>
 		<div class="row">
 			<div class="col-sm-6 mx-auto"><span class="label label-default">受付</span></div>
 		</div>
 		<div class="row">
-			<div class="col-sm-6 mx-auto"><input type="text" class="form-control" name="wk.nameTo" wk.nameTakenBy="受付名前"></div>
+			<div class="col-sm-6 mx-auto mb-4"><input type="text" class="form-control" name="wk.nameTo" wk.nameTakenBy="受付名前"></div>
 		</div>
 		<div class="row">
 			<div class="col-sm-6 mx-auto"><span class="label label-default">日付</span></div>
 		</div>
 		<div class="row">
-			<div class="col-sm-6 mx-auto"><input type="date" class="form-control" name="wk.dateTime" wk.nameTakenBy="日付"></div>
+			<div class="col-sm-6 mx-auto mb-4"><input type="date" class="form-control" name="wk.dateTime" wk.nameTakenBy="日付"></div>
 		</div>
 		<div class="row">
 			<div class="col-sm-6 mx-auto"><span class="label label-default">伝言確認</span></div>
 		</div>
 
-		<!-- プルダウン作成途中 -->
-		<div class="dropdown">
-			<button type="button" class="btn btn-primary dropdown-toggle col-sm-6" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
-			<ul class="dropdown-menu">
-				<li><button class="dropdown-item" value="項目1">未</button></li>
-				<li><button class="dropdown-item" value="項目2">済</button></li>
-			</ul>
+		<div class="radio col-sm-6 mx-auto ">
+			<label><input type="radio" name="radio" id="wk.mess.conf.yes" value="wk.mess.conf.yes" checked=""> 未</label>
 		</div>
 
+		<div class="radio col-sm-6 mx-auto">
+			<label><input type="radio" name="radio" id="wk.mess.conf.no" value="wk.mess.conf.no"> 済</label>
 		</div>
-			<div class="row"> 
-			<div class="col-sm-6 mx-auto text-center mb-3"><input type="submit" class="btn btn-primary btn-md" value="検索"></input></div>
+
+		<div class="row"> 
+			<div class="col-sm-6 mx-auto text-center mb-4"><input type="submit" class="btn btn-primary btn-md" value="検索"></input></div>
 		</div>
 	</div>
 
 
-
-
 	<div class="container">
-		<table class="col-sm-12 mx-auto table ">
+		<table class="table">
 	                <thead>
 	                <tr class="bg-info">
-	                    <td >時間</td>
+	                    <td>時間</td>
 	                    <td>To</td>
 	                    <td>From</td>
 	                    <td>受付</td>
-	                    <td>要件</td>
+	                    <td>用件</td>
 	                    <td>伝言確認</td>
 	                </tr>
 	                </thead>
@@ -107,8 +103,8 @@
 	                        <td>{{entity.nameFrom}} <input type="hidden" name='nameFrom' value="{{entity.nameFrom}}"></td>
 	                        <!-- 受付 -->
 	                        <td>{{entity.nameTakenBy}} <input type="hidden" name='nameTakenBy' value="{{entity.nameTakenBy}}"></td>
-	                        <!-- 要件 -->
-	                                                {% if entity.requirement == '0' %}
+	                        <!-- 用件 -->
+	                         {% if entity.requirement == '0' %}
                         	<td width="30%" align=center>
                         		{% if entity.message == '' %}
 	                        	電話がありました
