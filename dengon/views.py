@@ -9,11 +9,10 @@ from dengon.forms import dengonForm
 
 def input(request):
 	entities = dengon.objects.all()
-	return render(request, 'input.html', {'entities':entities})
+	return render(request, 'input.html')
 
 def list(request):
-
-	#伝言登録から遷移
+	#from input
 	if 'input' in request.POST:
 		#check
 		form = dengonForm(request.POST)
@@ -21,25 +20,19 @@ def list(request):
 			return render(request, 'input.html', {'error':1})
 		#create
 		if 'nameTo' in request.POST:
-			nameTo = request.POST['nameTo']
-			nameFrom = request.POST['nameFrom']
-			nameTakenBy = request.POST['nameTakenBy']
-			requirement = request.POST['requirement']
-			phoneNumber = request.POST['phoneNumber']
-			message = request.POST['message']
-			dengon.objects.update_or_create(nameTo=nameTo,
-											nameFrom=nameFrom,
-											nameTakenBy=nameTakenBy,
-											requirement=requirement,
-											phoneNumber=phoneNumber,
-											message=message)
+			dengon.objects.update_or_create(nameTo=request.POST['nameTo'],
+											nameFrom=request.POST['nameFrom'],
+											nameTakenBy=request.POST['nameTakenBy'],
+											requirement=request.POST['requirement'],
+											phoneNumber=request.POST['phoneNumber'],
+											message=request.POST['message'])
 
-	#伝言一覧から遷移
-	#search
+	#from list
 	if 'search' in request.POST:
-		wkdateTime = request.POST['wk.dateTime']
-		entities = dengon.objects.all()
+		#search with query
+		entities = dengon.objects.filter(nameTo=request.POST['wk.nameTo'])
 	else:
+		#search all
 		entities = dengon.objects.all()
 
 	return render(request, 'list.html', {'entities':entities})
