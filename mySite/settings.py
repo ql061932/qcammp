@@ -25,7 +25,7 @@ SECRET_KEY = 'pw+!r)^_i^qwc2bs(jud6h#x)(o@lf-qp+d2==6w=m!r8%5p!+'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['172.30.12.129','127.0.0.1']
 
 
 # Application definition
@@ -82,18 +82,6 @@ DATABASES = {
         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
 }
-
-#DATABASES = {
-#    'default': {
-#        'ENGINE': 'django.db.backends.mysql',
-#        'NAME': 'Youhei726$dengon', #　作成したデータベース名
-#        'USER': 'Youhei726', # ログインユーザー名
-#				'PASSWORD': 'qcammp001',
-#        'HOST': 'Youhei726.mysql.pythonanywhere-services.com',
-#        'PORT': '',
-#    }
-#}
-
 
 # Password validation
 # https://docs.djangoproject.com/en/2.0/ref/settings/#auth-password-validators
