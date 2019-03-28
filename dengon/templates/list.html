@@ -131,10 +131,9 @@
                         {% endif %}
 	                        <!-- 伝言確認 -->
 	                        <td>
-	                        	<div class="custom-control custom-switch">
-									<input type="checkbox" class="custom-control-input" id="customSwitch1" >
-									<label class="custom-control-label" for="customSwitch1">済</label>
-								</div>
+	                        <div class="custom-control custom-switch">
+                                    <input type="checkbox" class="custom-control-input" id="{{ entity.id }}" >
+                                    <label class="custom-control-label" for="{{ entity.id }}">済</label>
 	                        </td>
 	                    </tr>
 	                </form>     
