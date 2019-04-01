@@ -36,47 +36,49 @@
 	</div>
 	
 	<div class="container bg-light mb-3">
+		<form action="list" method="POST">{% csrf_token %}
+			<div class="row">
+				<div class="col-sm-6 mx-auto"><span class="label label-default">To</span></div>
+			</div>
+			<div class="row">
+				<div class="col-sm-6 mx-auto mb-4"><input type="text" class="form-control" name="nameTo" placeholder="To名前"></div>
+			</div>
+			<div class="row">
+				<div class="col-sm-6 mx-auto"><span class="label label-default">受付</span></div>
+			</div>
+			<div class="row">
+				<div class="col-sm-6 mx-auto mb-4"><input type="text" class="form-control" name="nameTakenBy" placeholder="受付名前"></div>
+			</div>
+			<div class="row">
+				<div class="col-sm-6 mx-auto"><span class="label label-default">日付</span></div>
+			</div>
+			<div class="row">
+				<div class="col-sm-6 mx-auto mb-4"><input type="date" class="form-control" name="dateTime" value="{% now "Y-m-d"%}"></div>
+			</div>
+			<div class="row">
+				<div class="col-sm-6 mx-auto"><span class="label label-default">伝言確認</span></div>
+			</div>
 
-		<div class="row">
-			<div class="col-sm-6 mx-auto"><span class="label label-default">To</span></div>
-		</div>
-		<div class="row">
-			<div class="col-sm-6 mx-auto mb-4"><input type="text" class="form-control" name="wk.nameTo" placeholder="To名前"></div>
-		</div>
-		<div class="row">
-			<div class="col-sm-6 mx-auto"><span class="label label-default">受付</span></div>
-		</div>
-		<div class="row">
-			<div class="col-sm-6 mx-auto mb-4"><input type="text" class="form-control" name="wk.nameTo" wk.nameTakenBy="受付名前"></div>
-		</div>
-		<div class="row">
-			<div class="col-sm-6 mx-auto"><span class="label label-default">日付</span></div>
-		</div>
-		<div class="row">
-			<div class="col-sm-6 mx-auto mb-4"><input type="date" class="form-control" name="wk.dateTime" wk.nameTakenBy="日付"></div>
-		</div>
-		<div class="row">
-			<div class="col-sm-6 mx-auto"><span class="label label-default">伝言確認</span></div>
-		</div>
+			<div class="radio col-sm-6 mx-auto ">
+				<label><input type="radio" name="check" id="check" value="False" checked=""> 未</label>
+			</div>
 
-		<div class="radio col-sm-6 mx-auto ">
-			<label><input type="radio" name="radio" id="wk.mess.conf.yes" value="wk.mess.conf.yes" checked=""> 未</label>
-		</div>
+			<div class="radio col-sm-6 mx-auto">
+				<label><input type="radio" name="check" id="check" value="True"> 済</label>
+			</div>
 
-		<div class="radio col-sm-6 mx-auto">
-			<label><input type="radio" name="radio" id="wk.mess.conf.no" value="wk.mess.conf.no"> 済</label>
-		</div>
-
-		<div class="row"> 
-			<div class="col-sm-6 mx-auto text-center mb-4"><input type="submit" class="btn btn-primary btn-md" value="検索"></input></div>
-		</div>
+			<div class="row"> 
+				<input type="hidden" name="search" value="search">
+				<div class="col-sm-6 mx-auto text-center mb-4"><input type="submit" class="btn btn-primary btn-md" value="検索"></input></div>
+			</div>
+		</form>
 	</div>
-
 
 	<div class="container">
 		<table class="table">
 	                <thead>
 	                <tr class="bg-info">
+						<td>日</td>
 	                    <td>時間</td>
 	                    <td>To</td>
 	                    <td>From</td>
@@ -96,13 +98,14 @@
 	                <form action="update_task" method="POST">{% csrf_token %}
 	                    <tr>
 	                        <!-- 時間 -->
-	                        <td>{{entity.dateTime}} <input type="hidden" name='dateTime' value="{{entity.dateTime}}"></td>
+							<td>{{entity.dateTime|date:"Y/m/d"}}</td>
+							<td>{{entity.dateTime|date:"G:i"}} </td>
 	                        <!-- To -->
-	                        <td>{{entity.nameTo}} <input type="hidden" name='nameTo' value="{{entity.nameTo}}"></td>
+	                        <td>{{entity.nameTo}}</td>
 	                        <!-- From -->
-	                        <td>{{entity.nameFrom}} <input type="hidden" name='nameFrom' value="{{entity.nameFrom}}"></td>
+	                        <td>{{entity.nameFrom}}</td>
 	                        <!-- 受付 -->
-	                        <td>{{entity.nameTakenBy}} <input type="hidden" name='nameTakenBy' value="{{entity.nameTakenBy}}"></td>
+	                        <td>{{entity.nameTakenBy}}</td>
 	                        <!-- 用件 -->
 	                         {% if entity.requirement == '0' %}
                         	<td width="30%" align=center>
@@ -125,15 +128,15 @@
                         		{% if entity.message == '' %}
                         		先方へ電話してください
                         		{% else %}
-                        		<span class="text-primary"  data-original-title="{{entity.message}}" data-toggle="tooltip">先方へ電話してください</span>
+                        		<span class="text-primary"  data-original-title="message:{{entity.message}} phone:{{entity.phoneNumber}}" data-toggle="tooltip">先方へ電話してください</span>
                         		{% endif %}
                         	</td>
                         {% endif %}
 	                        <!-- 伝言確認 -->
 	                        <td>
 	                        <div class="custom-control custom-switch">
-                                    <input type="checkbox" class="custom-control-input" id="{{ entity.id }}" >
-                                    <label class="custom-control-label" for="{{ entity.id }}">済</label>
+                                <input type="checkbox" class="custom-control-input" id="{{ entity.id }}" >
+                                <label class="custom-control-label" for="{{ entity.id }}">済</label>
 	                        </td>
 	                    </tr>
 	                </form>     
